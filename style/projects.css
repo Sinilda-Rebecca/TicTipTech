@@ -9,7 +9,7 @@
   --gap: 20px;
   --radius: 0px;              /* sharp edges */
   --transition: all 0.3s linear;
-  --font-heading: 'Space Grotesk', sans-serif;
+  --font-heading: 'Open Sans', sans-serif;
   --font-body: 'Inter', sans-serif;      /* font for body */
 }
 
