@@ -65,7 +65,7 @@ function getAndPost() {
   console.log(formData);
 
   // --- Send to Google Sheet ---
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxTu_EEu5i4E0JjJyvRGtQAJj7j2eNaNVoBuPOQZFeZ9q73M_dgYEehprVqN4ApypJ-/exec"; // replace with your Web App URL
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzSLaEDMvloAykLcDvRuymlCGzZqRI4zPpXf-7BU_LJJRYKiXUHaN7lX44KvYSRalqP/exec";
 
   const formBody = new FormData();
   for (let key in formData) {
