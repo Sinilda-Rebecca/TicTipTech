@@ -4,440 +4,180 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | Project Inquiry</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #1a1f25 0%, #252b33 100%);
-      color: #e0e6ed;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 1000px; /* Increased width */
-      width: 100%;
-      background: #1e252d;
-      padding: 50px;
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      position: relative;
-      overflow: hidden;
-      transform: translateY(0);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-      border: 1px solid #2d3744;
-    }
-
-    .container:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-    }
-
-    .container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-      border-radius: 20px 20px 0 0;
-    }
-
-    h1 {
-      text-align: center;
-      color: #f0f4f8;
-      margin-bottom: 15px;
-      font-weight: 700;
-      position: relative;
-      padding-bottom: 15px;
-      font-size: 28px;
-    }
-
-    h1::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-      border-radius: 2px;
-    }
-
-    p {
-      text-align: center;
-      color: #a0aec0;
-      margin-bottom: 35px;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    form {
-      margin-top: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 30px;
-      position: relative;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
-
-    .form-group:nth-child(n) { 
-      animation-delay: calc(0.1s * var(--delay)); 
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #cbd5e0;
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-    }
-
-    label i {
-      margin-right: 10px;
-      color: #4facfe;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="url"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #3a4452;
-      border-radius: 12px;
-      font-size: 16px;
-      background-color: #28303a;
-      color: #e2e8f0;
-      transition: all 0.3s ease;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #4facfe;
-      box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.3);
-      outline: none;
-      background-color: #2d3744;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 130px;
-    }
-
-    /* Radio Button Styling */
-    .option-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 10px;
-    }
-
-    .option-item {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-
-    .option-input {
-      opacity: 0;
-      position: absolute;
-    }
-
-    .option-label {
-      padding: 12px 20px;
-      background: #28303a;
-      border: 1px solid #3a4452;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      font-size: 15px;
-      user-select: none;
-      min-width: 150px;
-      text-align: center;
-      color: #cbd5e0;
-    }
-
-    .option-input:checked + .option-label {
-      background: #1a222e;
-      border-color: #4facfe;
-      color: #ffffff;
-      font-weight: 600;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .option-input:focus + .option-label {
-      outline: 2px solid #4facfe;
-      outline-offset: 2px;
-    }
-
-    button {
-      margin-top: 30px;
-      width: 100%;
-      padding: 18px;
-      background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-      color: #0f172a;
-      border: none;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-      letter-spacing: 0.5px;
-    }
-
-    button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    button:active {
-      transform: translateY(0);
-    }
-
-    button::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.6s;
-    }
-
-    button:hover::after {
-      left: 100%;
-    }
-
-    .note {
-      font-size: 15px;
-      color: #a0aec0;
-      margin-top: 25px;
-      text-align: center;
-      line-height: 1.6;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    .note i {
-      color: #4facfe;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 30px;
-        max-width: 95%;
-      }
-
-      .option-group {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .option-label {
-        min-width: auto;
-        text-align: left;
-        padding: 14px;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="../style/contact.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Contact Us</h1>
-    <p>Tell us about your project. If you're unsure, choose "Not decided yet".</p>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="container nav-container">
+      <a href="/" class="brand">TicTip</a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="#">Services</a>
+        <a href="../pages/projects.html">Projects</a>
+        <a href="../pages/contact.html" class="active">Contact</a>
+      </nav>
+      <a href="#" class="cta">Let's Talk</a>
+    </div>
+  </header>
 
-    <form>
-      <!-- Basic Info -->
-      <div class="form-group" style="--delay: 1">
-        <label><i class="fas fa-user"></i> Name</label>
-        <input type="text" placeholder="Enter your name" required>
-      </div>
-
-      <div class="form-group" style="--delay: 2">
-        <label><i class="fas fa-envelope"></i> Email</label>
-        <input type="email" placeholder="Enter your email" required>
-      </div>
-
-      <div class="form-group" style="--delay: 3">
-        <label><i class="fas fa-phone"></i> Phone (optional)</label>
-        <input type="text" placeholder="Enter your phone number">
-      </div>
-
-      <div class="form-group" style="--delay: 4">
-        <label><i class="fas fa-building"></i> Company / Organization (optional)</label>
-        <input type="text" placeholder="Your company name">
-      </div>
-
-      <!-- Project Type - Radio Buttons -->
-      <div class="form-group" style="--delay: 5">
-        <label><i class="fas fa-project-diagram"></i> Project Type</label>
-        <div class="option-group">
-          <div class="option-item">
-            <input type="radio" id="type-website" name="project-type" class="option-input" value="Website" checked>
-            <label for="type-website" class="option-label">Website</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="type-webapp" name="project-type" class="option-input" value="Web App">
-            <label for="type-webapp" class="option-label">Web App</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="type-mobile" name="project-type" class="option-input" value="Mobile App">
-            <label for="type-mobile" class="option-label">Mobile App</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="type-software" name="project-type" class="option-input" value="Software">
-            <label for="type-software" class="option-label">Software</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="type-other" name="project-type" class="option-input" value="Other">
-            <label for="type-other" class="option-label">Other</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project Description -->
-      <div class="form-group" style="--delay: 6">
-        <label><i class="fas fa-file-alt"></i> Project Description</label>
-        <textarea placeholder="Briefly describe your project idea"></textarea>
-      </div>
-
-      <!-- Budget Range - Radio Buttons -->
-      <div class="form-group" style="--delay: 7">
-        <label><i class="fas fa-dollar-sign"></i> Budget Range</label>
-        <div class="option-group">
-          <div class="option-item">
-            <input type="radio" id="budget-undecided" name="budget" class="option-input" value="Not decided yet" checked>
-            <label for="budget-undecided" class="option-label">Not decided yet</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="budget-low" name="budget" class="option-input" value="Below ₹1000">
-            <label for="budget-low" class="option-label">Below ₹1000</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="budget-mid1" name="budget" class="option-input" value="₹1000 - ₹5000">
-            <label for="budget-mid1" class="option-label">₹1000 - ₹5000</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="budget-mid2" name="budget" class="option-input" value="₹5000 - ₹10000">
-            <label for="budget-mid2" class="option-label">₹5000 - ₹10000</label>
-          </div>
-          <div class="option-item">
-            <input type="radio" id="budget-high" name="budget" class="option-input" value="Above ₹10000">
-            <label for="budget-high" class="option-label">Above ₹10000</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reference Website -->
-      <div class="form-group" style="--delay: 8">
-        <label><i class="fas fa-link"></i> Reference Website (if any)</label>
-        <input type="url" placeholder="https://example.com">
-      </div>
-
-      <!-- Technology Preferences -->
-      <div class="form-group" style="--delay: 9">
-        <label><i class="fas fa-server"></i> Preferred Backend</label>
-        <select>
-          <option>Not decided yet</option>
-          <option>Java (Secure and reliable)</option>
-          <option>Node.js (Fast and scalable)</option>
-          <option>Python (Clean and efficient)</option>
-          <option>PHP (Cost-effective)</option>
-          <option>.NET Core (Robust for enterprise)</option>
-          <option>Go (High performance)</option>
-          <option>Firebase (Serverless and quick)</option>
-        </select>
-      </div>
-
-      <div class="form-group" style="--delay: 10">
-        <label><i class="fas fa-laptop-code"></i> Preferred Frontend</label>
-        <select>
-          <option>Not decided yet</option>
-          <option>React.js (Modern and dynamic)</option>
-          <option>Vue.js (Lightweight and flexible)</option>
-          <option>Angular (Structured and powerful)</option>
-          <option>Next.js (SEO-friendly React)</option>
-          <option>Svelte (Fast and minimal)</option>
-          <option>HTML + CSS + JS (Simple and affordable)</option>
-          <option>Flutter Web (Cross-platform UI)</option>
-        </select>
-      </div>
-
-      <button type="submit" style="--delay: 11">
-        <i class="fas fa-paper-plane"></i> Submit Details
-      </button>
-
-      <p class="note" style="--delay: 12">
-        <i class="fas fa-info-circle"></i> After submission, our team will review your details and contact you to schedule a meeting.
-      </p>
-    </form>
+  <!-- Cursor -->
+  <div id="cursor">
+    <div id="cursor-dot"></div>
   </div>
 
-  <script>
-    // Focus enhancement for accessibility
-    document.querySelectorAll('.option-input').forEach(input => {
-      input.addEventListener('focus', () => {
-        input.nextElementSibling.style.outline = '2px solid #4facfe';
-      });
-      input.addEventListener('blur', () => {
-        input.nextElementSibling.style.outline = 'none';
-      });
-    });
+  <!-- Contact Form Section -->
+  <main class="container contact-section">
+    <div class="form-wrapper">
+      <h1>Contact Us</h1>
+      <p>Tell us about your project. If you're unsure, choose "Not decided yet".</p>
 
-    // Form submission simulation
-    document.querySelector('form').addEventListener('submit', e => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      const original = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-      btn.disabled = true;
+      <form id="contactForm">
+        <div class="form-group" style="--delay: 1">
+          <label><i class="fas fa-user"></i> Name</label>
+          <input type="text" placeholder="Enter your name" required>
+        </div>
 
-      setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-check"></i> Submitted Successfully!';
-        btn.style.background = 'linear-gradient(90deg, #00b09b, #96c93d)';
-        setTimeout(() => {
-          btn.innerHTML = original;
-          btn.disabled = false;
-          btn.style.background = 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)';
-        }, 2500);
-      }, 1500);
-    });
-  </script>
+        <div class="form-group" style="--delay: 2">
+          <label><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group" style="--delay: 3">
+          <label><i class="fas fa-phone"></i> Phone (optional)</label>
+          <input type="text" placeholder="Enter your phone number">
+        </div>
+
+        <div class="form-group" style="--delay: 4">
+          <label><i class="fas fa-building"></i> Company / Organization (optional)</label>
+          <input type="text" placeholder="Your company name">
+        </div>
+
+        <div class="form-group" style="--delay: 5">
+          <label><i class="fas fa-project-diagram"></i> Project Type</label>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" id="type-website" name="project-type" class="option-input" value="Website" checked>
+              <label for="type-website" class="option-label">Website</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="type-webapp" name="project-type" class="option-input" value="Web App">
+              <label for="type-webapp" class="option-label">Web App</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="type-mobile" name="project-type" class="option-input" value="Mobile App">
+              <label for="type-mobile" class="option-label">Mobile App</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="type-software" name="project-type" class="option-input" value="Software">
+              <label for="type-software" class="option-label">Software</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="type-other" name="project-type" class="option-input" value="Other">
+              <label for="type-other" class="option-label">Other</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="--delay: 6">
+          <label><i class="fas fa-file-alt"></i> Project Description</label>
+          <textarea placeholder="Briefly describe your project idea"></textarea>
+        </div>
+
+        <div class="form-group" style="--delay: 7">
+          <label><i class="fas fa-dollar-sign"></i> Budget Range</label>
+          <div class="option-group">
+            <div class="option-item">
+              <input type="radio" id="budget-undecided" name="budget" class="option-input" value="Not decided yet" checked>
+              <label for="budget-undecided" class="option-label">Not decided yet</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="budget-low" name="budget" class="option-input" value="Below ₹1000">
+              <label for="budget-low" class="option-label">Below ₹1000</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="budget-mid1" name="budget" class="option-input" value="₹1000 - ₹5000">
+              <label for="budget-mid1" class="option-label">₹1000 - ₹5000</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="budget-mid2" name="budget" class="option-input" value="₹5000 - ₹10000">
+              <label for="budget-mid2" class="option-label">₹5000 - ₹10000</label>
+            </div>
+            <div class="option-item">
+              <input type="radio" id="budget-high" name="budget" class="option-input" value="Above ₹10000">
+              <label for="budget-high" class="option-label">Above ₹10000</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="--delay: 8">
+          <label><i class="fas fa-link"></i> Reference Website (if any)</label>
+          <input type="url" placeholder="https://example.com">
+        </div>
+
+        <button onclick="getAndPost()" type="submit" style="--delay: 11">
+          <i class="fas fa-paper-plane"></i> Submit Details
+        </button>
+
+        <p class="note" style="--delay: 12">
+          <i class="fas fa-info-circle"></i> After submission, our team will review your details and contact you to schedule a meeting.
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>TicTip</h3>
+        <p>We have a mission to make people around the world better through scalable, maintainable, and beautiful web applications.</p>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">News & Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Movement</h4>
+        <ul>
+          <li><a href="#">What TicTip</a></li>
+          <li><a href="#">Support Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Why TicTip</a></li>
+          <li><a href="#">Capital</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Support Center</a></li>
+          <li><a href="./contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©2025 TicTip. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Terms & Agreements</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/contact.js"></script>
 </body>
 </html>
