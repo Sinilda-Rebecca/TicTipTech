@@ -1,0 +1,120 @@
+/* =============================
+   SERVICES PAGE — CUSTOM CSS
+   Matches home.css theme exactly
+==============================*/
+
+:root {
+  --accent: #C19A6B;
+  --text-light: #111;
+  --text-muted: #555;
+  --border: #e5e5e5;
+  --section-bg: #f9f9f9;
+  --radius: 10px;
+  --transition: all 0.3s ease;
+  --font-heading: 'Open Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ---------- HERO SECTION ---------- */
+.services-hero {
+  padding: 90px 5%;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(79,172,254,0.05), rgba(79,172,254,0.02));
+  border-radius: var(--radius);
+  margin-top: 30px;
+}
+
+.services-hero h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 15px;
+}
+
+.services-hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ---------- SERVICES LIST SECTION ---------- */
+.services-list {
+  padding: 70px 0;
+  background: var(--section-bg);
+}
+
+.services-list .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-block {
+  background: #fff;
+  padding: 32px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  text-align: center;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.service-block:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.service-block i {
+  font-size: 2.7rem;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.service-block h2 {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+}
+
+.service-block p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---------- CTA SECTION ---------- */
+.services-cta {
+  margin: 60px auto;
+  max-width: 800px;
+}
+
+.services-cta p {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ---------- ANIMATIONS ---------- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s ease-out;
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .services-hero h1 {
+    font-size: 2.3rem;
+  }
+  .service-block {
+    padding: 26px;
+  }
+}

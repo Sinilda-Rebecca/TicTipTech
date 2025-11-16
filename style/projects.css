@@ -2,7 +2,7 @@
   --bg: #ffffff;
   --section-bg: #f9f9f9;
   --text: #111111;
-  --muted: #555555;
+  --muted: #000;
   --accent: #C19A6B; /* gold-brown accent */
   --border: #e5e5e5;
   --card-bg: #1c2128;
@@ -200,7 +200,7 @@ nav a:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #1c2128bc;
+  background: #272727e0;
   padding: 14px 16px;
   border-top: 1px solid var(--border);
 }
@@ -211,7 +211,7 @@ nav a:hover {
 }
 .meta p {
   margin: 3px 0 0;
-  color: var(--accent);
+  color: #ffffff;
   font-size: 0.9rem;
 }
 
