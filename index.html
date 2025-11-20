@@ -3,175 +3,279 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TicTip — Our Projects</title>
+  <title>TicTip — Web & App Solutions</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div id="cursor">
-    <div id="cursor-dot"></div>
-  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- ===== Header ===== -->
+</head>
+
+<body>
+
+  <!-- Cursor -->
+  <div id="cursor"><div id="cursor-dot"></div></div>
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
   <header class="topbar">
     <div class="container nav-container">
-      <a href="../index.html" class="brand">TicTip</a>
+
+      <a href="index.html" class="brand">
+        <img src="images/output-onlinepngtools.png" alt="TicTip Logo" class="brand-logo">
+      </a>
+
       <nav>
-        <a href="../index.html" class="active">Home</a>
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About Us</a>
         <a href="pages/service.html">Services</a>
         <a href="pages/projects.html">Projects</a>
         <a href="pages/contact.html">Contact</a>
       </nav>
-      <a href="#" class="cta">Let's Talk</a>
+
+      <a href="pages/contact.html" class="cta">Let's Talk</a>
     </div>
+    <!-- Mobile Menu Toggle -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Full Screen Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About us</a>
+        <a href="pages/service.html">Services</a>
+        <a href="pages/projects.html">Projects</a>
+        <a href="pages/contact.html">Contact</a>
+      </nav>
+    </div>
+
   </header>
 
-  <!-- ===== Hero Section ===== -->
+  <!-- =======================================================
+       HERO SECTION
+  ======================================================== -->
   <section id="home" class="hero">
+
     <div class="hero-content">
-      <h1>Building Beautiful, Powerful, and Scalable Web Experiences</h1>
-      <p>We design and develop custom digital solutions that merge creativity with technology — turning your ideas into engaging, high-performance products.</p>
+      <h1>Building Beautiful, Powerful & Scalable Digital Experiences</h1>
+      <p>
+        We design and develop custom digital solutions that merge creativity with technology — turning your ideas into engaging, high-performance products.
+      </p>
+
       <div class="hero-buttons">
         <button class="primary-btn">Explore Services</button>
         <button class="secondary-btn"><i class="fa-solid fa-play"></i> Watch Demo</button>
       </div>
     </div>
+
     <div class="hero-image">
       <img src="images/pic3-1.png" alt="Developer working on code">
     </div>
+
   </section>
 
-  <!-- ===== Programs / Services ===== -->
-  <section class="programs">
+  <!-- =======================================================
+       PROGRAMS / SERVICES
+  ======================================================== -->
+  <section class="programs animate-on-scroll">
     <div class="section-header">
       <h2><i class="fa-solid fa-crown"></i> What We Do</h2>
     </div>
+
     <div class="program-grid">
+
       <div class="program-card active">
         <i class="fa-solid fa-laptop-code icon"></i>
         <h3>Web Development</h3>
-        <p>We build responsive, high-performance websites using the latest frontend technologies. From landing pages to full-scale platforms, we deliver fast, secure, and scalable web solutions.</p>
+        <p>
+          We build responsive, fast, high-performance websites using modern frameworks and clean UI/UX design.
+        </p>
         <a href="#" class="learn-more">Learn More →</a>
       </div>
+
       <div class="program-card">
         <i class="fa-solid fa-server icon"></i>
         <h3>App Development</h3>
-        <p>Transform your ideas into engaging digital products. Our team builds interactive and secure web apps powered by Java and modern frameworks — built for speed and reliability.</p>
+        <p>
+          Transform your ideas into interactive digital products built with speed, security, and modern architecture.
+        </p>
         <a href="#" class="learn-more">Learn More →</a>
       </div>
+
       <div class="program-card">
-        <i class="fa-solid fa-cloud icon"></i>
+        <i class="fa-solid fa-database icon"></i>
         <h3>Backend Solutions</h3>
-        <p>Using Java (Spring Boot) and relational databases, we develop robust backend systems and RESTful APIs that power your web applications with speed and stability.</p>
+        <p>
+          Scalable backend architecture & APIs built using Node.js, Python, and cloud-ready technology.
+        </p>
         <a href="#" class="learn-more">Learn More →</a>
       </div>
+
       <div class="program-card">
-        <i class="fa-solid fa-cloud icon"></i>
-        <h3>UI/UX Design</h3>
-        <p>We craft interfaces that are not only beautiful but intuitive. Our design process focuses on enhancing user journeys through research, prototyping, and testing.</p>
+        <i class="fa-solid fa-paint-brush icon"></i>
+        <h3>UI / UX Design</h3>
+        <p>
+          We deliver clean, modern interfaces focused on user experience, flow & brand identity.
+        </p>
         <a href="#" class="learn-more">Learn More →</a>
       </div>
+
       <div class="program-card">
-        <i class="fa-solid fa-cloud icon"></i>
+        <i class="fa-solid fa-life-ring icon"></i>
         <h3>Maintenance & Support</h3>
-        <p>From regular updates to security enhancements — we keep your digital presence optimized, secure, and up to date.</p>
+        <p>
+          Full ongoing support to keep your website and application updated, secure & performing well.
+        </p>
         <a href="#" class="learn-more">Learn More →</a>
       </div>
+
     </div>
   </section>
 
-  <!-- ===== Value Proposition ===== -->
-  <section class="value">
+  <!-- =======================================================
+       VALUE SECTION
+  ======================================================== -->
+  <section class="value animate-on-scroll">
+
     <div class="value-content">
+
       <div class="value-text">
         <h2><i class="fa-solid fa-gem"></i> Our Value To Help You</h2>
         <p>We don’t just build apps — we build partnerships. From idea to launch, we’re with you every step of the way.</p>
       </div>
+
       <div class="value-benefits">
+
         <div class="benefit">
           <i class="fa-solid fa-heart"></i>
-          <h4>Becomes Healthier</h4>
-          <p>Your app will be maintainable, secure, and easy to scale.</p>
+          <h4>Maintainability</h4>
+          <p>Your system remains clean, scalable & easy to update.</p>
         </div>
+
         <div class="benefit">
           <i class="fa-solid fa-bolt"></i>
-          <h4>Increase Energy</h4>
-          <p>Fast, performant, and optimized for real-world usage.</p>
+          <h4>Performance</h4>
+          <p>Fast, optimized & smooth performance across all platforms.</p>
         </div>
+
         <div class="benefit">
           <i class="fa-solid fa-shield-alt"></i>
-          <h4>Controlling Weight</h4>
-          <p>Keep costs low with efficient architecture and cloud optimization.</p>
+          <h4>Security First</h4>
+          <p>We follow best practices to keep your data secure.</p>
         </div>
+
         <div class="benefit">
           <i class="fa-solid fa-star"></i>
-          <h4>Becomes Happier</h4>
-          <p>Happy clients = happy developers = long-term success.</p>
+          <h4>Client Happiness</h4>
+          <p>Your success is our top priority — always.</p>
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ===== Get Started ===== -->
-  <section class="get-started">
+  <!-- =======================================================
+       GET STARTED
+  ======================================================== -->
+  <section class="get-started animate-on-scroll">
     <div class="get-started-content">
       <i class="fa-solid fa-flag"></i>
       <h2>Get Started With TicTip</h2>
-      <p>Discover tips & best practices for your next project — and get your first consultation free.</p>
+      <p>Discover expert tips for your next project — and get your first consultation completely free.</p>
       <button class="primary-btn">Get Started</button>
     </div>
   </section>
 
-  <!-- ===== Menu / Features ===== -->
-  <section class="menu-section">
+  <!-- =======================================================
+       TECH STACK SECTION
+  ======================================================== -->
+  <section class="menu-section animate-on-scroll">
+
     <div class="section-header">
       <h2><i class="fa-solid fa-book"></i> Try Our Tech Stack</h2>
-      <p>We provide curated tools & frameworks for every stage of your project.</p>
+      <p>We provide curated tools & frameworks for every stage of your development journey.</p>
     </div>
+
     <div class="menu-grid">
-      <div class="menu-item">
-        <i class="fa-solid fa-clock"></i>
-        <span>Frontend Stack</span>
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-fire"></i>
-        <span>Backend Stack</span>
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-calendar-days"></i>
-        <span>Database Solutions</span>
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-lock"></i>
-        <span>Security & Auth</span>
-      </div>
+      <div class="menu-item"><i class="fa-solid fa-code"></i><span>Frontend Stack</span></div>
+      <div class="menu-item"><i class="fa-solid fa-server"></i><span>Backend Stack</span></div>
+      <div class="menu-item"><i class="fa-solid fa-database"></i><span>Database Solutions</span></div>
+      <div class="menu-item"><i class="fa-solid fa-lock"></i><span>Security & Auth</span></div>
     </div>
+
     <div class="menu-features">
+
       <div class="feature-card">
         <img src="images/feature1.png" alt="React App">
         <h3>React + TypeScript</h3>
         <p>Modern, type-safe frontend for any scale.</p>
         <button>Try Now</button>
       </div>
+
       <div class="feature-card">
         <img src="images/feature2.png" alt="Node API">
         <h3>Node.js + PostgreSQL</h3>
-        <p>Robust backend with relational data modeling.</p>
+        <p>Robust backend with relational database modeling.</p>
         <button>Try Now</button>
       </div>
+
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       TESTIMONIALS
+  ======================================================== -->
+  <section class="testimonials animate-on-scroll">
+
+    <div class="section-header">
+      <h2><i class="fa-solid fa-quote-left"></i> Testimonials</h2>
+    </div>
+
+    <div class="testimonial-grid">
+
+      <div class="testimonial-card">
+        <div class="avatar">
+          <img src="images/avatar1.jpg" alt="Client">
+        </div>
+        <p>"TicTip delivered our product on time with great attention to detail. Highly recommended!"</p>
+        <h4>Ravi Kumar</h4>
+        <span>Product Manager</span>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="avatar">
+          <img src="images/avatar2.jpg" alt="Client">
+        </div>
+        <p>"Amazing UI/UX work! Our conversion rate improved significantly. Fantastic team!"</p>
+        <h4>Anita Rao</h4>
+        <span>Head of Growth</span>
+      </div>
+
     </div>
   </section>
 
- 
-  <!-- ===== Footer ===== -->
- <footer>
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+  <footer>
+
     <div class="footer-content">
+
       <div class="footer-col">
         <h3>TicTip</h3>
-        <p>We have a mission to make people around the world better through scalable, maintainable, and beautiful web applications.</p>
+        <p>We make people around the world better through scalable, maintainable & beautiful digital solutions.</p>
       </div>
+
       <div class="footer-col">
         <h4>About</h4>
         <ul>
@@ -180,6 +284,7 @@
           <li><a href="#">News & Blog</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Movement</h4>
         <ul>
@@ -187,6 +292,7 @@
           <li><a href="#">Support Us</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
@@ -195,6 +301,7 @@
           <li><a href="#">Security</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Support</h4>
         <ul>
@@ -203,7 +310,9 @@
           <li><a href="pages/contact.html">Contact Us</a></li>
         </ul>
       </div>
+
     </div>
+
     <div class="footer-bottom">
       <p>©2025 TicTip. All rights reserved.</p>
       <div class="footer-links">
@@ -211,8 +320,10 @@
         <a href="#">Privacy Policy</a>
       </div>
     </div>
+
   </footer>
 
+  <!-- Script -->
   <script src="js/home.js" defer></script>
 
 </body>
