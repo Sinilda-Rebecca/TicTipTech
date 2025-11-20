@@ -18,15 +18,39 @@
   <!-- Header -->
   <header class="topbar">
     <div class="container nav-container">
-      <a href="../index.html" class="brand">TicTip</a>
+
+      <a href="../index.html" class="brand">
+        <img src="../images/output-onlinepngtools.png" alt="TicTip Logo" class="brand-logo">
+      </a>
+
       <nav>
         <a href="../index.html">Home</a>
-        <a href="../services.html" class="active">Services</a>
-        <a href="../pages/projects.html">Projects</a>
-        <a href="../pages/contact.html">Contact</a>
+        <a href="about.html">About Us</a>
+        <a href="service.html" class="active">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
       </nav>
-      <a href="#" class="cta">Let's Talk</a>
+
+      <a href="pages/contact.html" class="cta">Let's Talk</a>
     </div>
+    <!-- Mobile Menu Toggle -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Full Screen Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About us</a>
+        <a href="pages/service.html">Services</a>
+        <a href="pages/projects.html">Projects</a>
+        <a href="pages/contact.html">Contact</a>
+      </nav>
+    </div>
+
   </header>
 
   <!-- Hero Section -->
@@ -78,7 +102,9 @@
       <i class="fa-solid fa-flag"></i>
       <h2>Ready to Build Something Amazing?</h2>
       <p>Your vision deserves a team that can turn ideas into polished digital products. Let's build it together.</p>
-      <button class="primary-btn">Start Your Project</button>
+      <button class="primary-btn" onclick="window.location.href='#'"> Start Your Project
+      </button>
+
     </div>
   </section>
 
@@ -86,8 +112,7 @@
   <footer>
     <div class="footer-content">
       <div class="footer-col">
-        <h3>TicTip</h3>
-        <p>Your trusted partner for creating refined, scalable, and modern digital products.</p>
+        <p>We have a mission to make people around the world better through scalable, maintainable, and beautiful web applications.</p>
       </div>
       <div class="footer-col">
         <h4>About</h4>
@@ -95,6 +120,13 @@
           <li><a href="#">About Us</a></li>
           <li><a href="#">Features</a></li>
           <li><a href="#">News & Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Movement</h4>
+        <ul>
+          <li><a href="#">What TicTip</a></li>
+          <li><a href="#">Support Us</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -110,7 +142,7 @@
         <ul>
           <li><a href="#">FAQs</a></li>
           <li><a href="#">Support Center</a></li>
-          <li><a href="../pages/contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
     </div>
