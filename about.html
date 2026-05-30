@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | TicTip Tech Studio</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style/home.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Premium Page-Specific Adjustments */
+    .hero {
+      padding: 180px 5% 100px;
+    }
+    
+    .studio-vision {
+      padding: 120px 5%;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 80px;
+      align-items: center;
+    }
+    
+    .vision-content h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      letter-spacing: -1px;
+    }
+    
+    .vision-content p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      opacity: 0.9;
+    }
+
+    .vision-image-wrapper {
+      position: relative;
+      padding: 10px;
+    }
+
+    .vision-image-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed var(--accent);
+      border-radius: calc(var(--radius) + 10px);
+      opacity: 0.3;
+      transform: rotate(-1.5deg);
+      pointer-events: none;
+    }
+    
+    .vision-image img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 35px rgba(212, 175, 55, 0.08);
+      transition: var(--transition);
+      display: block;
+    }
+    
+    .vision-image img:hover {
+      border-color: var(--accent);
+      transform: scale(1.03) rotate(0.5deg);
+      box-shadow: 0 25px 50px rgba(212, 175, 55, 0.15);
+    }
+    
+    .core-values {
+      padding: 120px 5%;
+      background: var(--bg-primary);
+    }
+    
+    @media (max-width: 1000px) {
+      .vision-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+      .vision-image-wrapper {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cursor -->
+  <div id="cursor">
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+  </div>
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+  <header class="topbar">
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand">
+        <img src="images/output-onlinepngtools.png" alt="TicTip Logo" class="brand-logo">
+      </a>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About Us</a>
+        <a href="pages/service.html">Services</a>
+        <a href="pages/projects.html">Projects</a>
+        <a href="pages/contact.html">Contact</a>
+      </nav>
+
+      <a href="pages/contact.html" class="cta">Let's Talk</a>
+    </div>
+    <!-- Mobile Menu Toggle -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Full Screen Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About us</a>
+        <a href="pages/service.html">Services</a>
+        <a href="pages/projects.html">Projects</a>
+        <a href="pages/contact.html">Contact</a>
+      </nav>
+    </div>
+
+  </header>
+
+  <!-- =======================================================
+       HERO SECTION (3D ASYMMETRICAL ABOUT REDESIGN)
+  ======================================================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>We Craft <span class="gold-gradient-text">Masterful</span> Digital Journeys</h1>
+      <p>
+        TicTip Tech is an elite digital product design and development studio. We collaborate with high-growth startups and visionary brands to engineer fast, robust, and stunning web and app solutions that lead their markets.
+      </p>
+      <div class="hero-buttons">
+        <button class="primary-btn" onclick="window.location.href='pages/service.html'">Explore Services</button>
+        <button class="secondary-btn" onclick="window.location.href='pages/contact.html'">Let's Partner</button>
+      </div>
+    </div>
+
+    <!-- Premium Interactive 3D Perspective Floating Canvas for About Page -->
+    <div class="hero-canvas-3d">
+      <div class="canvas-inner animate-on-scroll">
+        <!-- Floating Glassmorphic Workspace card -->
+        <div class="floating-mockup web-frame" style="width: 320px; height: 180px;">
+          <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title">studio_profile.json</span>
+          </div>
+          <div class="window-body">
+            <p class="code-line" style="margin-bottom: 3px;"><span class="keyword">{</span></p>
+            <p class="code-line" style="margin-bottom: 3px;">&nbsp;&nbsp;<span class="string">"name"</span>: <span class="fun">"TicTip Tech"</span>,</p>
+            <p class="code-line" style="margin-bottom: 3px;">&nbsp;&nbsp;<span class="string">"core"</span>: <span class="fun">"Elite UI & Engineering"</span>,</p>
+            <p class="code-line" style="margin-bottom: 3px;">&nbsp;&nbsp;<span class="string">"status"</span>: <span class="string">"Active"</span></p>
+            <p class="code-line" style="margin-bottom: 3px;"><span class="keyword">}</span></p>
+          </div>
+        </div>
+        <!-- Floating Glass Core Stats card -->
+        <div class="floating-mockup mobile-frame" style="width: 175px; height: 250px; right: -25px; top: 75px; border-radius: 24px; padding: 0;">
+          <div class="mobile-notch" style="width: 80px; height: 14px; top: 0; left: 50%; transform: translateX(-50%); border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;"></div>
+          <div class="mobile-screen" style="padding: 22px 14px 14px; background: var(--bg-card); display: flex; flex-direction: column; justify-content: center; height: 100%;">
+            <div style="font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; text-align: center;">Agency Stats</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--text-light); margin-bottom: 2px; text-align: center;">99%</div>
+            <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 12px; text-align: center;">Satisfaction</div>
+            
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--text-light); margin-bottom: 2px; text-align: center;">50+</div>
+            <div style="font-size: 0.65rem; color: var(--text-muted); text-align: center;">Shipped Products</div>
+          </div>
+        </div>
+        <!-- Floating Badges -->
+        <div class="floating-badge badge-1" style="top: 210px; left: -20px;"><i class="fa-solid fa-gem"></i> Premium UI</div>
+        <div class="floating-badge badge-2" style="top: -15px; right: 10px;"><i class="fa-solid fa-gauge-high"></i> 100% Perf</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       STUDIO VISION
+  ======================================================== -->
+  <section class="studio-vision">
+    <div class="container vision-grid">
+      <div class="vision-content animate-on-scroll">
+        <h2>Architecting the <span class="gold-gradient-text">Future of UI & Code</span></h2>
+        <p>
+          We believe that software should not just solve a problem, but offer an interface that feels alive and premium. Every hover, every physics transition, and every single line of backend architecture is optimized for performance and visual grandeur.
+        </p>
+        <p>
+          As a specialized startup development agency, we merge state-of-the-art technologies with rigorous design systems, turning complex operations into seamless, fluid, and intuitive user flows.
+        </p>
+      </div>
+      <div class="vision-image-wrapper animate-on-scroll">
+        <div class="vision-image">
+          <img src="images/punto.jpg" alt="TicTip Tech design studio mockup">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       CORE VALUES (BENTO GRID REDESIGN)
+  ======================================================== -->
+  <section class="core-values">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+        <h2>Our Founding <span class="gold-gradient-text">Principles</span></h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 10px auto 0;">These values define every interaction, feature design, and server optimization we execute.</p>
+      </div>
+
+      <div class="bento-grid" style="padding: 0;">
+        <div class="bento-card card-wide animate-on-scroll">
+          <div class="bento-header">
+            <i class="fa-solid fa-crown bento-icon"></i>
+            <span class="bento-badge">Premium Quality</span>
+          </div>
+          <div class="bento-body">
+            <h3>Elite Aesthetics & UI Design</h3>
+            <p>We believe first impressions are crucial. We construct high-end micro-interactions, rich gold gradient highlights, custom LERP trailing cursor physics, and pixel-perfect responsive layouts that command premium brand value and wow your users at first glance.</p>
+            <div class="bento-wireframe" style="margin-top: 15px;">
+              <div class="wire-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="wire-lines">
+                <span class="line w-80" style="background: var(--accent-gradient);"></span>
+                <span class="line w-40"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bento-card animate-on-scroll">
+          <div class="bento-header">
+            <i class="fa-solid fa-bolt bento-icon"></i>
+          </div>
+          <div class="bento-body">
+            <h3>Unmatched Performance</h3>
+            <p>Speed is a core feature. We engineer custom modular architectures that load instantly, score perfect lighthouse performance metrics, and scale effortlessly under load.</p>
+          </div>
+        </div>
+        
+        <div class="bento-card animate-on-scroll">
+          <div class="bento-header">
+            <i class="fa-solid fa-shield-halved bento-icon"></i>
+          </div>
+          <div class="bento-body">
+            <h3>Enterprise Security</h3>
+            <p>We build with complete confidence. Our codebases follow stringent security practices, utilizing secure cryptographic authentication, CORS protection, and secure data pipelines.</p>
+          </div>
+        </div>
+        
+        <div class="bento-card card-wide animate-on-scroll">
+          <div class="bento-header">
+            <i class="fa-solid fa-briefcase bento-icon"></i>
+            <span class="bento-badge">Startup Velocity</span>
+          </div>
+          <div class="bento-body">
+            <h3>Agile Partnership & Longevity</h3>
+            <p>We operate not just as short-term contractors, but as a dedicated technical partner. We align directly with founders through design sprints, active product delivery pipelines, and comprehensive maintenance programs that guarantee your system's long-term resilience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       CTA / GET STARTED
+  ======================================================== -->
+  <section class="get-started container animate-on-scroll">
+    <div class="get-started-content">
+      <i class="fa-solid fa-gem"></i>
+      <h2>Partner with TicTip Tech</h2>
+      <p>Have a game-changing product concept? Let’s assemble it into a premium reality. Reach out to schedule an elite consultation.</p>
+      <button class="primary-btn" onclick="window.location.href='pages/contact.html'">Schedule Let's Talk</button>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <p>We have a mission to make people around the world better through scalable, maintainable, and beautiful web applications.</p>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">News & Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Movement</h4>
+        <ul>
+          <li><a href="#">What TicTip</a></li>
+          <li><a href="#">Support Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Why TicTip</a></li>
+          <li><a href="#">Capital</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Support Center</a></li>
+          <li><a href="pages/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©2025 TicTip. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Terms & Agreements</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/home.js" defer></script>
+
+</body>
+</html>

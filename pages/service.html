@@ -13,7 +13,7 @@
 <body>
 
   <!-- Cursor -->
-  <div id="cursor"><div id="cursor-dot"></div></div>
+  <div id="cursor"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
 
   <!-- Header -->
   <header class="topbar">
@@ -25,13 +25,13 @@
 
       <nav>
         <a href="../index.html">Home</a>
-        <a href="about.html">About Us</a>
+        <a href="../about.html">About Us</a>
         <a href="service.html" class="active">Services</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
       </nav>
 
-      <a href="pages/contact.html" class="cta">Let's Talk</a>
+      <a href="contact.html" class="cta">Let's Talk</a>
     </div>
     <!-- Mobile Menu Toggle -->
     <div class="hamburger" id="hamburger">
@@ -43,11 +43,11 @@
     <!-- Full Screen Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
       <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About us</a>
-        <a href="pages/service.html">Services</a>
-        <a href="pages/projects.html">Projects</a>
-        <a href="pages/contact.html">Contact</a>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About us</a>
+        <a href="service.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
 
@@ -61,37 +61,68 @@
     </div>
   </section>
 
-  <!-- Services List Section -->
+  <!-- Services List Section (Bento Grid Overhaul) -->
   <section class="services-list">
-    <div class="container">
-      <div class="service-block animate-on-scroll">
-        <i class="fa-solid fa-laptop-code"></i>
-        <h2>Web Development</h2>
-        <p>We create high‑performance, responsive websites for businesses of all sizes using modern stacks and pixel‑perfect UI designs.</p>
+    <div class="container bento-grid">
+      <div class="bento-card card-wide animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-laptop-code bento-icon"></i>
+          <span class="bento-badge">Featured Solution</span>
+        </div>
+        <div class="bento-body">
+          <h2>Web Application Development</h2>
+          <p>We create high‑performance, responsive websites for businesses of all sizes using modern stacks (React, Vue, Node.js) and pixel‑perfect UI designs.</p>
+          <!-- Nested visual wireframe element -->
+          <div class="bento-wireframe">
+            <div class="wire-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="wire-lines">
+              <span class="line w-40"></span>
+              <span class="line w-80"></span>
+              <span class="line w-60"></span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="service-block animate-on-scroll">
-        <i class="fa-solid fa-mobile-screen"></i>
-        <h2>App Development</h2>
-        <p>Build seamless mobile applications with intuitive UI and scalable backend systems — engineered for speed and reliability.</p>
+      <div class="bento-card animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-mobile-screen bento-icon"></i>
+        </div>
+        <div class="bento-body">
+          <h2>App Development</h2>
+          <p>Build seamless mobile applications with intuitive UI and scalable backend systems — engineered for speed, cross-platform performance, and reliability.</p>
+        </div>
       </div>
 
-      <div class="service-block animate-on-scroll">
-        <i class="fa-solid fa-server"></i>
-        <h2>Backend Engineering</h2>
-        <p>From REST APIs to database architecture — we deliver secure and optimized backend systems powered by Java Spring Boot.</p>
+      <div class="bento-card animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-server bento-icon"></i>
+        </div>
+        <div class="bento-body">
+          <h2>Backend Engineering</h2>
+          <p>From robust REST & GraphQL APIs to secure database modeling — we deliver secure, scalable, and fully optimized backend systems.</p>
+        </div>
       </div>
 
-      <div class="service-block animate-on-scroll">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-        <h2>UI / UX Design</h2>
-        <p>We craft clean, modern, and user‑friendly designs that enhance user engagement and simplify complex workflows.</p>
+      <div class="bento-card card-wide animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-wand-magic-sparkles bento-icon"></i>
+          <span class="bento-badge">Startup UI</span>
+        </div>
+        <div class="bento-body">
+          <h2>UI / UX Studio Design</h2>
+          <p>We craft clean, modern, and user‑friendly design grids that enhance user engagement, simplify complex operations, and express premium brand equity.</p>
+        </div>
       </div>
 
-      <div class="service-block animate-on-scroll">
-        <i class="fa-solid fa-shield-halved"></i>
-        <h2>Maintenance & Security</h2>
-        <p>Stay updated and protected with our long‑term maintenance, security patching, and rapid issue‑resolution support.</p>
+      <div class="bento-card animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-shield-halved bento-icon"></i>
+        </div>
+        <div class="bento-body">
+          <h2>Maintenance & Security</h2>
+          <p>Stay updated and protected with long‑term maintenance, automated backups, active firewall monitors, and rapid support.</p>
+        </div>
       </div>
     </div>
   </section>

@@ -1,23 +1,84 @@
 /* =========================================================
-   TicTip — Main JS (Corrected & Optimized)
+   TicTip — Main JS (Redesigned with Premium Physics)
    ========================================================= */
 
 /* -----------------------------
-   Custom Mouse Cursor
+   Custom Mouse Cursor (LERP Trailing Dual-Ring)
 ----------------------------- */
-const cursor = document.getElementById("cursor-dot");
+const cursorDot = document.getElementById("cursor-dot");
+const cursorRing = document.getElementById("cursor-ring");
 
-document.addEventListener("mousemove", (e) => {
-  cursor.style.top = e.clientY + "px";
-  cursor.style.left = e.clientX + "px";
+let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+let ringPos = { x: mouse.x, y: mouse.y };
+let dotPos = { x: mouse.x, y: mouse.y };
+
+// Hide cursor when leaving window
+document.addEventListener("mouseleave", () => {
+  if (cursorDot) cursorDot.style.opacity = "0";
+  if (cursorRing) cursorRing.style.opacity = "0";
 });
 
+document.addEventListener("mouseenter", () => {
+  if (cursorDot) cursorDot.style.opacity = "1";
+  if (cursorRing) cursorRing.style.opacity = "1";
+});
+
+document.addEventListener("mousemove", (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+// Physics loop
+function animateCursor() {
+  // LERP for smooth outer ring trail (15% interpolation speed)
+  ringPos.x += (mouse.x - ringPos.x) * 0.15;
+  ringPos.y += (mouse.y - ringPos.y) * 0.15;
+  
+  // Fast LERP for inner dot (50% interpolation speed)
+  dotPos.x += (mouse.x - dotPos.x) * 0.5;
+  dotPos.y += (mouse.y - dotPos.y) * 0.5;
+  
+  if (cursorRing) {
+    cursorRing.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px)`;
+  }
+  if (cursorDot) {
+    cursorDot.style.transform = `translate(${dotPos.x}px, ${dotPos.y}px)`;
+  }
+  
+  requestAnimationFrame(animateCursor);
+}
+requestAnimationFrame(animateCursor);
+
+// Hover animations on links and interactive cards
+function setupCursorHovers() {
+  const hoverables = document.querySelectorAll(
+    "a, button, .program-card, .benefit, .feature-card, .testimonial-card, .menu-item, .hamburger, .cta, .filter-btn"
+  );
+  
+  hoverables.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      document.body.classList.add("cursor-hover");
+    });
+    
+    el.addEventListener("mouseleave", () => {
+      document.body.classList.remove("cursor-hover");
+    });
+  });
+}
+
+// Initial setup
+setupCursorHovers();
+
+// Re-run cursor hovers dynamically on scroll/interaction
+document.addEventListener("scroll", setupCursorHovers);
+
+// Mouse state clicks
 document.addEventListener("mousedown", () => {
-  cursor.classList.add("clicking");
+  document.body.classList.add("cursor-click");
 });
 
 document.addEventListener("mouseup", () => {
-  cursor.classList.remove("clicking");
+  document.body.classList.remove("cursor-click");
 });
 
 
@@ -118,11 +179,12 @@ if (watchBtn) {
 /* -----------------------------
    Explore Services Button
 ----------------------------- */
-const exploreBtn = document.querySelector(".primary-btn");
+const exploreBtn = document.querySelector(".hero-content .primary-btn");
 
 if (exploreBtn) {
   exploreBtn.addEventListener("click", () => {
-    window.location.href = "pages/service.html";
+    const isInPages = window.location.pathname.includes("/pages/");
+    window.location.href = isInPages ? "service.html" : "pages/service.html";
   });
 }
 
@@ -130,7 +192,7 @@ if (exploreBtn) {
 /* -----------------------------
    Simple Performance Logging
 ----------------------------- */
-console.log("%cTicTip Loaded Successfully! 🚀", "color:#C19A6B; font-size:16px");
+console.log("%cTicTip Loaded Successfully! 🚀", "color:#D4AF37; font-size:16px");
 
 /* ==================== MOBILE MENU ==================== */
 
@@ -149,3 +211,27 @@ document.querySelectorAll(".mobile-menu nav a").forEach(link => {
     mobileMenu.classList.remove("active");
   });
 });
+
+/* ------------- Toggle cursor visibility with "C" key ------------- */
+window.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'c') {
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    if (dot) dot.style.display = dot.style.display === 'none' ? 'block' : 'none';
+    if (ring) ring.style.display = ring.style.display === 'none' ? 'block' : 'none';
+  }
+});
+
+/* ------------- PAGE TRANSITION FADE ------------- */
+function handleTransitionLink(e) {
+  const a = e.target.closest('a');
+  if (!a) return;
+  const href = a.getAttribute('href');
+  if (!href || href.startsWith('#') || a.getAttribute('target') === '_blank') return;
+  
+  e.preventDefault();
+  document.documentElement.style.transition = 'opacity .45s ease';
+  document.documentElement.style.opacity = '0';
+  setTimeout(() => window.location.href = href, 450);
+}
+document.addEventListener('click', handleTransitionLink);

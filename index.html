@@ -16,7 +16,7 @@
 <body>
 
   <!-- Cursor -->
-  <div id="cursor"><div id="cursor-dot"></div></div>
+  <div id="cursor"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
 
   <!-- =======================================================
        HEADER
@@ -59,14 +59,14 @@
   </header>
 
   <!-- =======================================================
-       HERO SECTION
+       HERO SECTION (3D ASYMMETRICAL REDESIGN)
   ======================================================== -->
   <section id="home" class="hero">
 
     <div class="hero-content">
-      <h1>Building Beautiful, Powerful & Scalable Digital Experiences</h1>
+      <h1>We Architect <span class="gold-gradient-text">Elite Digital Systems</span> for Scalable Growth</h1>
       <p>
-        We design and develop custom digital solutions that merge creativity with technology — turning your ideas into engaging, high-performance products.
+        A premium product development studio partnering with founders to engineer high-fidelity web applications, mobile software, and visual design assets that outperform benchmarks.
       </p>
 
       <div class="hero-buttons">
@@ -75,112 +75,165 @@
       </div>
     </div>
 
-    <div class="hero-image">
-      <img src="images/pic3-1.png" alt="Developer working on code">
+    <!-- Premium Interactive 3D Perspective Floating Canvas -->
+    <div class="hero-canvas-3d">
+      <div class="canvas-inner animate-on-scroll">
+        <!-- Floating Web App Mockup Frame -->
+        <div class="floating-mockup web-frame">
+          <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title">tictip_studio.js</span>
+          </div>
+          <div class="window-body">
+            <p class="code-line"><span class="keyword">const</span> studio = <span class="string">"TicTip"</span>;</p>
+            <p class="code-line"><span class="keyword">function</span> <span class="fun">architect</span>() {</p>
+            <p class="code-line">&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Elite Gold UI"</span>;</p>
+            <p class="code-line">}</p>
+          </div>
+        </div>
+        <!-- Floating Mobile App Mockup Frame -->
+        <div class="floating-mockup mobile-frame">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <div class="mobile-header">
+              <span class="logo">TicTip</span>
+              <i class="fa-solid fa-bars icon"></i>
+            </div>
+            <div class="mobile-chart">
+              <div class="bar bar-1"></div>
+              <div class="bar bar-2"></div>
+              <div class="bar bar-3"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Floating Tech Badges / Sparks -->
+        <div class="floating-badge badge-1"><i class="fa-brands fa-react"></i> React</div>
+        <div class="floating-badge badge-2"><i class="fa-brands fa-node-js"></i> Node.js</div>
+        <div class="floating-badge badge-3"><i class="fa-solid fa-wand-magic-sparkles"></i> UX Studio</div>
+      </div>
     </div>
 
   </section>
 
   <!-- =======================================================
-       PROGRAMS / SERVICES
+       BENTO GRID SERVICES OVERHAUL
   ======================================================== -->
-  <section class="programs animate-on-scroll">
+  <section class="programs">
     <div class="section-header">
-      <h2><i class="fa-solid fa-crown"></i> What We Do</h2>
+      <h2>Capabilities</h2>
+      <p>We combine elite engineering with magnificent, high-fidelity design.</p>
     </div>
 
-    <div class="program-grid">
-
-      <div class="program-card active">
-        <i class="fa-solid fa-laptop-code icon"></i>
-        <h3>Web Development</h3>
-        <p>
-          We build responsive, fast, high-performance websites using modern frameworks and clean UI/UX design.
-        </p>
-        <a href="#" class="learn-more">Learn More →</a>
+    <div class="bento-grid">
+      <div class="bento-card card-wide animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-laptop-code bento-icon"></i>
+          <span class="bento-badge">Featured Solution</span>
+        </div>
+        <div class="bento-body">
+          <h3>Web Application Development</h3>
+          <p>We architect responsive, fast, high-performance web systems using React, TypeScript, and clean code principles. Optimized for sub-second loading states and seamless user journeys.</p>
+          <!-- Nested visual wireframe element -->
+          <div class="bento-wireframe">
+            <div class="wire-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="wire-lines">
+              <span class="line w-40"></span>
+              <span class="line w-80"></span>
+              <span class="line w-60"></span>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="program-card">
-        <i class="fa-solid fa-server icon"></i>
-        <h3>App Development</h3>
-        <p>
-          Transform your ideas into interactive digital products built with speed, security, and modern architecture.
-        </p>
-        <a href="#" class="learn-more">Learn More →</a>
+      
+      <div class="bento-card animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-mobile-screen-button bento-icon"></i>
+        </div>
+        <div class="bento-body">
+          <h3>App Engineering</h3>
+          <p>Transforming complex software requirements into intuitive, highly responsive mobile apps built on React Native or Flutter architectures.</p>
+        </div>
       </div>
-
-      <div class="program-card">
-        <i class="fa-solid fa-database icon"></i>
-        <h3>Backend Solutions</h3>
-        <p>
-          Scalable backend architecture & APIs built using Node.js, Python, and cloud-ready technology.
-        </p>
-        <a href="#" class="learn-more">Learn More →</a>
+      
+      <div class="bento-card animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-server bento-icon"></i>
+        </div>
+        <div class="bento-body">
+          <h3>Backend Engineering</h3>
+          <p>Secure database modeling (SQL/NoSQL), REST/GraphQL API systems, and cloud architectures built on highly optimized node pipelines.</p>
+        </div>
       </div>
-
-      <div class="program-card">
-        <i class="fa-solid fa-paint-brush icon"></i>
-        <h3>UI / UX Design</h3>
-        <p>
-          We deliver clean, modern interfaces focused on user experience, flow & brand identity.
-        </p>
-        <a href="#" class="learn-more">Learn More →</a>
+      
+      <div class="bento-card card-wide animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-compass-drafting bento-icon"></i>
+          <span class="bento-badge">Startup Aesthetic</span>
+        </div>
+        <div class="bento-body">
+          <h3>High-Fidelity UI/UX Design</h3>
+          <p>Before coding, we visualize. Crafting state-of-the-art visual grids, cohesive typography scales, wireframes, and animated interactive prototypes that command premium brand value.</p>
+        </div>
       </div>
-
-      <div class="program-card">
-        <i class="fa-solid fa-life-ring icon"></i>
-        <h3>Maintenance & Support</h3>
-        <p>
-          Full ongoing support to keep your website and application updated, secure & performing well.
-        </p>
-        <a href="#" class="learn-more">Learn More →</a>
+      
+      <div class="bento-card animate-on-scroll">
+        <div class="bento-header">
+          <i class="fa-solid fa-clock-rotate-left bento-icon"></i>
+        </div>
+        <div class="bento-body">
+          <h3>Ongoing Support</h3>
+          <p>Ensuring constant system resilience with automated backups, proactive security patching, and structural maintenance.</p>
+        </div>
       </div>
-
     </div>
   </section>
 
   <!-- =======================================================
-       VALUE SECTION
+       EDITORIAL STEPPED VALUES REDESIGN
   ======================================================== -->
-  <section class="value animate-on-scroll">
-
+  <section class="value">
     <div class="value-content">
-
-      <div class="value-text">
-        <h2><i class="fa-solid fa-gem"></i> Our Value To Help You</h2>
-        <p>We don’t just build apps — we build partnerships. From idea to launch, we’re with you every step of the way.</p>
+      <div class="value-text animate-on-scroll">
+        <h2>Founding <span class="gold-gradient-text">Principles</span></h2>
+        <p>We operate not just as contractors, but as a dedicated technical partner, optimizing for extreme longevity and clean structural architecture.</p>
       </div>
 
-      <div class="value-benefits">
-
-        <div class="benefit">
-          <i class="fa-solid fa-heart"></i>
-          <h4>Maintainability</h4>
-          <p>Your system remains clean, scalable & easy to update.</p>
+      <div class="stepped-values">
+        <div class="step-item animate-on-scroll">
+          <div class="step-num">01</div>
+          <div class="step-desc">
+            <h4>Maintainability First</h4>
+            <p>Every folder, component, and utility function is structured logically, facilitating friction-free updates and seamless scaling capacity.</p>
+          </div>
         </div>
-
-        <div class="benefit">
-          <i class="fa-solid fa-bolt"></i>
-          <h4>Performance</h4>
-          <p>Fast, optimized & smooth performance across all platforms.</p>
+        
+        <div class="step-item animate-on-scroll">
+          <div class="step-num">02</div>
+          <div class="step-desc">
+            <h4>Extreme Performance</h4>
+            <p>Optimized bundle payloads, lazy asset loading, and server side configurations ensuring instant rendering speed across viewports.</p>
+          </div>
         </div>
-
-        <div class="benefit">
-          <i class="fa-solid fa-shield-alt"></i>
-          <h4>Security First</h4>
-          <p>We follow best practices to keep your data secure.</p>
+        
+        <div class="step-item animate-on-scroll">
+          <div class="step-num">03</div>
+          <div class="step-desc">
+            <h4>Confidential Security</h4>
+            <p>We deploy strict CORS policies, token security frameworks, and certified database routing structures to keep startup data safe.</p>
+          </div>
         </div>
-
-        <div class="benefit">
-          <i class="fa-solid fa-star"></i>
-          <h4>Client Happiness</h4>
-          <p>Your success is our top priority — always.</p>
+        
+        <div class="step-item animate-on-scroll">
+          <div class="step-num">04</div>
+          <div class="step-desc">
+            <h4>Cohesive Collaboration</h4>
+            <p>Direct alignment channels with founders, structured design sprints, and active delivery pipelines matching agile requirements.</p>
+          </div>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
   <!-- =======================================================

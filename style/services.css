@@ -4,38 +4,41 @@
 ==============================*/
 
 :root {
-  --bg: #000;
-  --accent: #C19A6B;
-  --text-light: #fff;
-  --text-muted: #fff;
-  --border: #e5e5e5;
-  --card-bg: #1c2128;
-  --gap: 20px;
-  --section-bg: #000;
-  --radius: 10px;
-  --transition: all 0.3s ease;
+  --bg: #FFFFFF;
+  --accent: #D4AF37;
+  --text-light: #0A0A10;
+  --text-muted: #2B2B35;
+  --border: rgba(212, 175, 55, 0.22);
+  --card-bg: #FFFFFF;
+  --gap: 24px;
+  --section-bg: #F6F6F9;
+  --radius: 12px;
+  --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
   --font-heading: 'Open Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.3);
-  --box-shadow: 0 6px 16px #C19A6B;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 15px 35px rgba(212, 175, 55, 0.12);
+  --box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
 }
 
 /* ---------- HERO SECTION ---------- */
 .services-hero {
-  padding: 90px 5%;
+  padding: 100px 5%;
   text-align: center;
-  background: #000;
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, var(--bg) 100%);
   border-radius: var(--radius);
   margin-top: 30px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .services-hero h1 {
   font-family: var(--font-heading);
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 3.2rem;
+  font-weight: 800;
   color: var(--text-light);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
 }
 
 .services-hero p {
@@ -43,59 +46,22 @@
   color: var(--text-muted);
   max-width: 700px;
   margin: 0 auto;
+  opacity: 0.9;
+  line-height: 1.6;
 }
 
 /* ---------- SERVICES LIST SECTION ---------- */
 .services-list {
-  padding: 70px 0;
+  padding: 85px 0;
   background: var(--section-bg);
-}
-
-.services-list .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.service-block {
-  background: #000;
-  padding: 32px;
-  border-radius: var(--radius);
-  border: 1px solid var(--accent);
-  text-align: center;
-  transition: var(--transition);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.service-block:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
-}
-
-.service-block i {
-  font-size: 2.7rem;
-  color: var(--accent);
-  margin-bottom: 18px;
-}
-
-.service-block h2 {
-  font-size: 1.5rem;
-  color: var(--text-light);
-  margin-bottom: 12px;
-  font-family: var(--font-heading);
-}
-
-.service-block p {
-  color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 /* ---------- CTA SECTION ---------- */
 .services-cta {
-  margin: 60px auto;
-  max-width: 800px;
+  margin: 80px auto;
+  max-width: 900px;
 }
 
 .services-cta p {
