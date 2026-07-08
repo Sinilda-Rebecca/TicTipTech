@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { API_URL } from "../config";
 
 function useOnScreen(ref, threshold = 0.15) {
   const [visible, setVisible] = useState(false);
@@ -79,7 +80,7 @@ export default function ProjectDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/projects/${key}`)
+    fetch(`${API_URL}/api/projects/${key}`)
       .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
       .then((data) => {
         const fb = FALLBACK[key] || FALLBACK["northline-crm"];

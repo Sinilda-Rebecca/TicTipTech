@@ -1,82 +1,156 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const toggleMobileMenu = () => setMobileMenuOpen((v) => !v);
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
+
+  // Read theme on mount
+  useEffect(() => {
+    const activeTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    setTheme(activeTheme);
+  }, []);
+
+  const toggleMenu = () => setMenuOpen((v) => !v);
+  const closeMenu = () => setMenuOpen(false);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    
+    // Add transition class to root
+    document.documentElement.classList.add("theme-transition");
+    
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("theme", nextTheme);
+    
+    // Clean up class after transition completes
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transition");
+    }, 500);
+  };
 
   return (
-    <header>
-      <nav className="wrap">
-        {/* Logo mark + wordmark */}
-        <Link to="/" className="logo" onClick={closeMobileMenu} style={{ gap: "10px" }}>
-          {/* Logo image — mix-blend-mode:multiply removes black bg on white surface */}
-          <span style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#ffffff",
-            borderRadius: "8px",
-            width: "38px",
-            height: "38px",
-            overflow: "hidden",
-            flexShrink: 0,
-            border: "1px solid #E7E9EC",
-          }}>
-            <img
-              src="/logo.png"
-              alt="TicTip logo mark"
-              style={{
-                width: "30px",
-                height: "30px",
-                objectFit: "contain",
-                mixBlendMode: "multiply",
-                display: "block",
-              }}
-            />
-          </span>
-          <span>TicTip</span>
-        </Link>
-
-        {/* Desktop nav links */}
-        <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <NavLink to="/services" className={({ isActive }) => (isActive ? "active" : "")}>Services</NavLink>
-          <NavLink to="/projects" className={({ isActive }) => (isActive ? "active" : "")}>Projects</NavLink>
-          <NavLink to="/about"    className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
-          <NavLink to="/contact"  className={({ isActive }) => (isActive ? "active" : "")}>Contact</NavLink>
-        </div>
-
-        {/* Right: CTA + burger */}
-        <div className="nav-right">
-          <Link to="/contact" className="btn btn-primary" onClick={closeMobileMenu}>
-            Start Your Project
+    <>
+      <header>
+        <div className="wrap nav-container">
+          {/* Logo mark + wordmark */}
+          <Link to="/" className="logo" onClick={closeMenu}>
+            <span className="logo-icon">
+              <img
+                src="/logo.png"
+                alt="TicTip logo mark"
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
+            </span>
+            <span>TicTip</span>
           </Link>
-          <button
-            className="burger"
-            aria-label="Menu"
-            onClick={toggleMobileMenu}
-            style={{ display: mobileMenuOpen ? "flex" : undefined }}
-          >
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-      </nav>
 
-      {/* Mobile drop-down */}
-      {mobileMenuOpen && (
-        <div style={{
-          position: "absolute", top: "76px", left: 0, right: 0,
-          background: "#fff", borderBottom: "1px solid #E7E9EC",
-          display: "flex", flexDirection: "column",
-          padding: "24px 32px", gap: "18px", zIndex: 99,
-        }}>
-          <Link to="/services" onClick={closeMobileMenu}>Services</Link>
-          <Link to="/projects" onClick={closeMobileMenu}>Projects</Link>
-          <Link to="/about"    onClick={closeMobileMenu}>About</Link>
-          <Link to="/contact"  onClick={closeMobileMenu}>Contact</Link>
+          {/* Desktop nav links */}
+          <div className="nav-links">
+            <NavLink to="/services" className={({ isActive }) => (isActive ? "active" : "")}>Services</NavLink>
+            <NavLink to="/projects" className={({ isActive }) => (isActive ? "active" : "")}>Projects</NavLink>
+            <NavLink to="/about"    className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
+            <NavLink to="/contact"  className={({ isActive }) => (isActive ? "active" : "")}>Contact</NavLink>
+          </div>
+
+          {/* Right: Toggle + Menu trigger */}
+          <div className="nav-right">
+            <button
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? "🌙" : "☀️"}
+            </button>
+            <button className="menu-btn" onClick={toggleMenu} aria-label="Open menu">
+              Menu
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+      </header>
+
+      {/* Fullscreen Overlay Menu (Ignite Agency Style) */}
+      <div className={`menu-overlay ${menuOpen ? "open" : ""}`}>
+        <div className="menu-header">
+          <Link to="/" className="logo" onClick={closeMenu}>
+            <span className="logo-icon">
+              <img
+                src="/logo.png"
+                alt="TicTip logo mark"
+                style={{ width: "80px", height: "80px", objectFit: "contain" }}
+              />
+            </span>
+            <span>TicTip</span>
+          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <button
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? "🌙" : "☀️"}
+            </button>
+            <button className="menu-close-btn" onClick={closeMenu} aria-label="Close menu">
+              Close
+            </button>
+          </div>
+        </div>
+
+        <div className="wrap menu-content">
+          {/* Left panel: Massive links */}
+          <nav className="menu-nav">
+            <div className="menu-nav-item">
+              <span className="menu-nav-num">01</span>
+              <NavLink to="/" className={({ isActive }) => `menu-nav-link ${isActive ? "active" : ""}`} onClick={closeMenu}>Home</NavLink>
+            </div>
+            <div className="menu-nav-item">
+              <span className="menu-nav-num">02</span>
+              <NavLink to="/services" className={({ isActive }) => `menu-nav-link ${isActive ? "active" : ""}`} onClick={closeMenu}>Services</NavLink>
+            </div>
+            <div className="menu-nav-item">
+              <span className="menu-nav-num">03</span>
+              <NavLink to="/projects" className={({ isActive }) => `menu-nav-link ${isActive ? "active" : ""}`} onClick={closeMenu}>Projects</NavLink>
+            </div>
+            <div className="menu-nav-item">
+              <span className="menu-nav-num">04</span>
+              <NavLink to="/about" className={({ isActive }) => `menu-nav-link ${isActive ? "active" : ""}`} onClick={closeMenu}>About</NavLink>
+            </div>
+            <div className="menu-nav-item">
+              <span className="menu-nav-num">05</span>
+              <NavLink to="/contact" className={({ isActive }) => `menu-nav-link ${isActive ? "active" : ""}`} onClick={closeMenu}>Contact</NavLink>
+            </div>
+          </nav>
+
+          {/* Right panel: Sidebar links / contact info */}
+          <div className="menu-sidebar">
+            <div>
+              <div className="menu-section-title">Say Hello</div>
+              <div className="menu-sidebar-links">
+                <a href="mailto:admin@tictiptech.com">admin@tictiptech.com</a>
+              </div>
+            </div>
+            <div>
+              <div className="menu-section-title">Follow Us</div>
+              <div className="menu-sidebar-links" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: "16px" }}>LinkedIn</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: "16px" }}>GitHub</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: "16px" }}>Twitter</a>
+              </div>
+            </div>
+            <div>
+              <Link to="/contact" className="btn btn-primary" onClick={closeMenu}>
+                Start Your Project →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

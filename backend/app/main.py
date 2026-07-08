@@ -1,4 +1,15 @@
-from fastapi import FastAPI, Depends, HTTPException
+import os
+# Custom .env loader to load configuration before importing submodules
+env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+if os.path.exists(env_path):
+    with open(env_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, val = line.split("=", 1)
+                os.environ[key.strip()] = val.strip().strip('"').strip("'")
+
+from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr
@@ -7,6 +18,7 @@ from datetime import datetime
 
 from .database import get_db, engine, Base
 from . import models
+from .email_service import send_email_notifications
 
 # Auto-create tables on startup (if not exists)
 Base.metadata.create_all(bind=engine)
@@ -77,7 +89,7 @@ def read_project(key: str, db: Session = Depends(get_db)):
     return db_project
 
 @app.post("/api/contact")
-def create_submission(submission: SubmissionCreateSchema, db: Session = Depends(get_db)):
+def create_submission(submission: SubmissionCreateSchema, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     db_submission = models.Submission(
         name=submission.name,
         email=submission.email,
@@ -91,4 +103,18 @@ def create_submission(submission: SubmissionCreateSchema, db: Session = Depends(
     db.add(db_submission)
     db.commit()
     db.refresh(db_submission)
+    
+    # Send thank you and lead notification emails in the background
+    background_tasks.add_task(
+        send_email_notifications,
+        name=submission.name,
+        email=submission.email,
+        project_type=submission.projectType,
+        budget=submission.budget,
+        description=submission.description,
+        phone=submission.phone,
+        company=submission.company
+    )
+
     return {"status": "success", "id": db_submission.id}
+

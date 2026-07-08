@@ -14,37 +14,28 @@ export default function Footer() {
   return (
     <footer>
       <div className="wrap">
+        {/* Next navigation block: Ignite Agency Style editorial footer routing */}
+        <div className="footer-next-heading">Where to next?</div>
+        <div className="footer-next-grid">
+          <Link to="/services" className="footer-next-link">Services</Link>
+          <Link to="/projects" className="footer-next-link">Projects</Link>
+          <Link to="/about" className="footer-next-link">About</Link>
+          <Link to="/contact" className="footer-next-link">Contact</Link>
+        </div>
+
         {/* Top grid */}
         <div className="footer-top">
           {/* Brand + newsletter */}
           <div>
-            {/* Logo mark + wordmark */}
-            <div className="logo" style={{ gap: "10px" }}>
-              <span style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#ffffff",
-                borderRadius: "8px",
-                width: "38px",
-                height: "38px",
-                overflow: "hidden",
-                flexShrink: 0,
-                border: "1px solid #E7E9EC",
-              }}>
+            <div className="logo" style={{ gap: "10px", marginBottom: "16px" }}>
+              <span className="logo-icon">
                 <img
                   src="/logo.png"
                   alt="TicTip logo mark"
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    objectFit: "contain",
-                    mixBlendMode: "multiply",
-                    display: "block",
-                  }}
+                  style={{ width: "80px", height: "80px", objectFit: "contain" }}
                 />
               </span>
-              <span>TicTip</span>
+              <span style={{ color: "#fff" }}>TicTip</span>
             </div>
             <p>
               A software development studio building digital products for startups, SMEs, and enterprises.
@@ -76,8 +67,8 @@ export default function Footer() {
           {/* Contact */}
           <div className="footer-col">
             <h4>Contact</h4>
-            <span>hello@tictiptech.com</span>
-            <span>+91 00000 00000</span>
+            <a href="mailto:admin@tictiptech.com" style={{ color: "inherit" }}>admin@tictiptech.com</a>
+            <span>+91 94477 17691</span>
             <span>Chennai, India</span>
           </div>
         </div>
@@ -85,31 +76,20 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="footer-bottom">
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            {/* Small logo in footer bottom */}
-            <span style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "#ffffff",
-              borderRadius: "5px",
-              width: "22px",
-              height: "22px",
-              overflow: "hidden",
-              border: "1px solid #E7E9EC",
-            }}>
+            <span className="logo-icon">
               <img
                 src="/logo.png"
                 alt=""
                 aria-hidden="true"
-                style={{ width: "18px", height: "18px", objectFit: "contain", mixBlendMode: "multiply", display: "block" }}
+                style={{ width: "28px", height: "28px", objectFit: "contain" }}
               />
             </span>
             <span>© 2026 TicTip Technology. All rights reserved.</span>
           </div>
           <div className="socials">
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="Twitter">X</a>
-            <a href="#" aria-label="GitHub">gh</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">X</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">gh</a>
           </div>
         </div>
       </div>

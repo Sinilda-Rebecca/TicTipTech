@@ -36,11 +36,15 @@ function Counter({ target, visible }) {
   return <>{val}</>;
 }
 
-function Reveal({ children, className = "", style }) {
+function Reveal({ children, className = "", style, delay = 0 }) {
   const ref = useRef(null);
   const visible = useOnScreen(ref);
   return (
-    <div ref={ref} className={`reveal ${visible ? "in" : ""} ${className}`} style={style}>
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "in" : ""} ${className}`}
+      style={{ ...style, transitionDelay: visible ? `${delay}ms` : "0ms" }}
+    >
       {children}
     </div>
   );
@@ -89,9 +93,48 @@ const STATS = [
   { count: 98,  suffix: "%", label: "On-time Delivery" },
 ];
 
+const TYPEWRITER_PHRASES = [
+  "companies depend on.",
+  "users love using.",
+  "businesses grow with.",
+  "studios scale up.",
+];
+
+function useTypewriter(phrases, typingSpeed = 60, pauseMs = 1800, deleteSpeed = 35) {
+  const [display, setDisplay] = useState("");
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const phrase = phrases[phraseIdx];
+    let timer;
+    if (!deleting && charIdx <= phrase.length) {
+      timer = setTimeout(() => {
+        setDisplay(phrase.slice(0, charIdx));
+        setCharIdx((c) => c + 1);
+      }, charIdx === phrase.length ? pauseMs : typingSpeed);
+    } else if (!deleting && charIdx > phrase.length) {
+      setDeleting(true);
+    } else if (deleting && charIdx > 0) {
+      timer = setTimeout(() => {
+        setDisplay(phrase.slice(0, charIdx - 1));
+        setCharIdx((c) => c - 1);
+      }, deleteSpeed);
+    } else {
+      setDeleting(false);
+      setPhraseIdx((i) => (i + 1) % phrases.length);
+    }
+    return () => clearTimeout(timer);
+  }, [charIdx, deleting, phraseIdx, phrases, typingSpeed, pauseMs, deleteSpeed]);
+
+  return display;
+}
+
 export default function About() {
   const statsRef = useRef(null);
   const statsVisible = useOnScreen(statsRef, 0.3);
+  const typewriterText = useTypewriter(TYPEWRITER_PHRASES);
 
   return (
     <>
@@ -104,7 +147,13 @@ export default function About() {
           <div className="page-hero-inner">
             <div>
               <span className="eyebrow">Who We Are</span>
-              <h1>Building digital products<br />companies depend on.</h1>
+              <h1 style={{ minHeight: "2.2em" }}>
+                Building digital products<br />
+                <span className="typewriter-phrase">
+                  {typewriterText}
+                  <span className="typewriter-cursor" />
+                </span>
+              </h1>
               <p className="lead">
                 TicTip Technology is a Chennai-based software studio. We design,
                 build, test, and ship digital products for startups, SMEs, and
@@ -148,13 +197,13 @@ export default function About() {
         <div className="wrap intro-grid">
           <Reveal>
             <span className="eyebrow">Our Story</span>
-            <p style={{ marginTop: "16px" }}>
+            <p style={{ marginTop: "24px" }}>
               TicTip was founded in 2019 with one belief: that great software is not
               an accident — it's engineered. We started as a small QA-first consultancy
               and grew into a full-stack product studio because our clients kept asking
               us to stay longer and do more.
             </p>
-            <p style={{ marginTop: "16px", fontSize: "19px", lineHeight: 1.65, color: "var(--text)", fontFamily: "var(--display)", fontWeight: 500 }}>
+            <p style={{ marginTop: "24px", fontSize: "22px", lineHeight: 1.6, color: "var(--ink)", fontFamily: "var(--display)", fontWeight: 700 }}>
               Today we run the entire product lifecycle — design, engineering, testing,
               and deployment — under one roof, so nothing gets lost in handoffs.
             </p>
@@ -193,7 +242,7 @@ export default function About() {
               <div className="mv-card">
                 <div className="mv-icon">🎯</div>
                 <h3>Our Mission</h3>
-                <p>
+                <p style={{ marginTop: "12px", color: "var(--muted)", lineHeight: "1.65" }}>
                   To deliver software products that companies can depend on in
                   production — built with rigorous engineering, tested automatically,
                   and designed to grow with the business.
@@ -202,7 +251,7 @@ export default function About() {
               <div className="mv-card">
                 <div className="mv-icon">🔭</div>
                 <h3>Our Vision</h3>
-                <p>
+                <p style={{ marginTop: "12px", color: "var(--muted)", lineHeight: "1.65" }}>
                   To be the most trusted technology partner for growth-stage businesses
                   in Asia — known not just for what we ship, but for how long it holds up.
                 </p>
@@ -248,7 +297,7 @@ export default function About() {
                   <div className="team-initials-light">{m.initials}</div>
                   <div>
                     <h4>{m.name}</h4>
-                    <p>{m.role}</p>
+                    <p style={{ color: "var(--muted)", marginTop: "4px" }}>{m.role}</p>
                   </div>
                 </div>
               ))}
@@ -272,7 +321,7 @@ export default function About() {
                   <div className="timeline-dot"></div>
                   <div className="timeline-content">
                     <h4>{t.h}</h4>
-                    <p>{t.p}</p>
+                    <p style={{ color: "var(--muted)", marginTop: "8px" }}>{t.p}</p>
                   </div>
                 </div>
               ))}
@@ -347,7 +396,7 @@ export default function About() {
                 <p>Tell us about your project — we'll reply within one business day.</p>
               </div>
               <div className="cta-actions">
-                <Link to="/contact" className="btn btn-primary">Start Your Project</Link>
+                <Link to="/contact" className="btn btn-primary">Start Your Project →</Link>
                 <Link to="/services" className="btn btn-outline">View Services</Link>
               </div>
             </div>

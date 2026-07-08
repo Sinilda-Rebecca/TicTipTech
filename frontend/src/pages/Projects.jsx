@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config";
 
 function useOnScreen(ref, threshold = 0.15) {
   const [visible, setVisible] = useState(false);
@@ -16,11 +17,15 @@ function useOnScreen(ref, threshold = 0.15) {
   return visible;
 }
 
-function Reveal({ children, className = "", style }) {
+function Reveal({ children, className = "", style, delay = 0 }) {
   const ref = useRef(null);
   const visible = useOnScreen(ref);
   return (
-    <div ref={ref} className={`reveal ${visible ? "in" : ""} ${className}`} style={style}>
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "in" : ""} ${className}`}
+      style={{ ...style, transitionDelay: visible ? `${delay}ms` : "0ms" }}
+    >
       {children}
     </div>
   );
@@ -35,7 +40,7 @@ const MOCK_PROJECTS = [
     category: "Software",
     cover: "cover-1",
     stack: ["React", "FastAPI", "PostgreSQL"],
-    desc: "An education-sector CRM that replaced three disconnected spreadsheets with a single system teams actually use.",
+    desc: "An education-sector CRM that replaced three spreadsheets with a single system teams actually use.",
   },
   {
     key: "fernway-retail",
@@ -79,13 +84,61 @@ const MOCK_PROJECTS = [
   },
 ];
 
+const TYPEWRITER_PHRASES = [
+  "shipped recently.",
+  "built for scale.",
+  "designed to convert.",
+  "delivered on time.",
+];
+
+function useTypewriter(phrases, typingSpeed = 60, pauseMs = 1800, deleteSpeed = 35) {
+  const [display, setDisplay] = useState("");
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const phrase = phrases[phraseIdx];
+    let timer;
+    if (!deleting && charIdx <= phrase.length) {
+      timer = setTimeout(() => {
+        setDisplay(phrase.slice(0, charIdx));
+        setCharIdx((c) => c + 1);
+      }, charIdx === phrase.length ? pauseMs : typingSpeed);
+    } else if (!deleting && charIdx > phrase.length) {
+      setDeleting(true);
+    } else if (deleting && charIdx > 0) {
+      timer = setTimeout(() => {
+        setDisplay(phrase.slice(0, charIdx - 1));
+        setCharIdx((c) => c - 1);
+      }, deleteSpeed);
+    } else {
+      setDeleting(false);
+      setPhraseIdx((i) => (i + 1) % phrases.length);
+    }
+    return () => clearTimeout(timer);
+  }, [charIdx, deleting, phraseIdx, phrases, typingSpeed, pauseMs, deleteSpeed]);
+
+  return display;
+}
+
 export default function Projects() {
   const [filter, setFilter] = useState("All");
   const [projects, setProjects] = useState(MOCK_PROJECTS);
   const [loading, setLoading] = useState(true);
 
+  // Floating hover preview coordinates
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
+  const typewriterText = useTypewriter(TYPEWRITER_PHRASES);
+
   useEffect(() => {
-    fetch("http://localhost:8000/api/projects")
+    fetch(`${API_URL}/api/projects`)
       .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
       .then((data) => {
         const mapped = data.map((item, idx) => {
@@ -110,7 +163,7 @@ export default function Projects() {
     : projects.filter((p) => p.category.toLowerCase() === filter.toLowerCase());
 
   return (
-    <>
+    <div onMouseMove={handleMouseMove}>
       {/* ── Page Hero ─────────────────────────────────────────────── */}
       <section className="page-hero">
         <div className="wrap">
@@ -120,7 +173,13 @@ export default function Projects() {
           <div className="page-hero-inner">
             <div>
               <span className="eyebrow">Selected Work</span>
-              <h1>A few things we've<br />shipped recently.</h1>
+              <h1 style={{ minHeight: "2.2em" }}>
+                A few things we've<br />
+                <span className="typewriter-phrase">
+                  {typewriterText}
+                  <span className="typewriter-cursor" />
+                </span>
+              </h1>
               <p className="lead">
                 A curated portfolio of client work across web, mobile, AI, and e-commerce.
                 Each project is a close collaboration — not a handoff.
@@ -144,7 +203,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── Portfolio Grid ────────────────────────────────────────── */}
+      {/* ── Portfolio Rows (Ignite Agency style) ─────────────────── */}
       <section>
         <div className="wrap">
           {/* Filter Bar */}
@@ -165,23 +224,39 @@ export default function Projects() {
               Loading projects...
             </div>
           ) : (
-            <div className="proj-grid">
-              {filtered.map((p) => (
-                <Reveal key={p.key}>
-                  <div className="proj-card">
-                    <div className={`proj-cover ${p.cover}`}>
-                      <span>{p.category}</span>
-                    </div>
-                    <div className="proj-body">
-                      <h3>{p.name}</h3>
-                      <p>{p.desc}</p>
-                      <div className="stack-tags">
-                        {p.stack.map((s) => <span key={s}>{s}</span>)}
-                      </div>
-                      <Link to={`/projects/${p.key}`} className="link">View Details →</Link>
-                    </div>
+            <div className="project-rows">
+              {filtered.map((p, idx) => (
+                <Link
+                  to={`/projects/${p.key}`}
+                  key={p.key}
+                  className="project-row-item"
+                  onMouseEnter={() => setHoveredProject(p.key)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <div className="project-row-left">
+                    <span className="project-row-num">{String(idx + 1).padStart(2, "0")}</span>
+                    <span className="project-row-name">{p.name}</span>
                   </div>
-                </Reveal>
+                  <span className="project-row-category">{p.category}</span>
+
+                  {/* Floating interactive image popup */}
+                  {hoveredProject === p.key && (
+                    <div
+                      className="project-row-preview"
+                      style={{
+                        left: mousePos.x + 20,
+                        top: mousePos.y + 20,
+                        position: "fixed",
+                        display: "flex",
+                        alignItems: "flex-end",
+                        padding: "16px"
+                      }}
+                    >
+                      <div className={`proj-cover ${p.cover}`} style={{ position: "absolute", inset: 0 }} />
+                      <span style={{ position: "relative", zIndex: 1, fontFamily: "var(--mono)", fontSize: "11px", background: "rgba(0,0,0,0.8)", padding: "4px 8px", borderRadius: "4px", color: "var(--accent)" }}>{p.stack.join(" · ")}</span>
+                    </div>
+                  )}
+                </Link>
               ))}
             </div>
           )}
@@ -204,13 +279,13 @@ export default function Projects() {
                 <p>Tell us what you're building — we'll reply within one business day.</p>
               </div>
               <div className="cta-actions">
-                <Link to="/contact" className="btn btn-primary">Start Your Project</Link>
+                <Link to="/contact" className="btn btn-primary">Start Your Project →</Link>
                 <Link to="/services" className="btn btn-outline">Our Services</Link>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   );
 }

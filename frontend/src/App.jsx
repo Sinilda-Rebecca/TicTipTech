@@ -9,6 +9,8 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
+import Promo from "./pages/Promo";
+
 
 /** Scroll progress bar + back-to-top + scroll-to-top on route change */
 function ScrollUtils() {
@@ -47,6 +49,11 @@ function ScrollUtils() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
   return (
     <Router>
       <ScrollUtils />
@@ -61,6 +68,8 @@ export default function App() {
           <Route path="/projects"      element={<Projects />} />
           <Route path="/projects/:key" element={<ProjectDetail />} />
           <Route path="/contact"       element={<Contact />} />
+          <Route path="/promo"         element={<Promo />} />
+
         </Routes>
 
         <Footer />

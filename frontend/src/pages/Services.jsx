@@ -16,11 +16,15 @@ function useOnScreen(ref, threshold = 0.15) {
   return visible;
 }
 
-function Reveal({ children, className = "", style }) {
+function Reveal({ children, className = "", style, delay = 0 }) {
   const ref = useRef(null);
   const visible = useOnScreen(ref);
   return (
-    <div ref={ref} className={`reveal ${visible ? "in" : ""} ${className}`} style={style}>
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "in" : ""} ${className}`}
+      style={{ ...style, transitionDelay: visible ? `${delay}ms` : "0ms" }}
+    >
       {children}
     </div>
   );
@@ -48,7 +52,48 @@ const PROCESS = [
   { n: "4", h: "Launch & Support", p: "We deploy, monitor, and stay on for the weeks after launch that matter most." },
 ];
 
+const TYPEWRITER_PHRASES = [
+  "software actually ships.",
+  "products users love.",
+  "systems scale up.",
+  "sprints convert.",
+];
+
+function useTypewriter(phrases, typingSpeed = 60, pauseMs = 1800, deleteSpeed = 35) {
+  const [display, setDisplay] = useState("");
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const phrase = phrases[phraseIdx];
+    let timer;
+    if (!deleting && charIdx <= phrase.length) {
+      timer = setTimeout(() => {
+        setDisplay(phrase.slice(0, charIdx));
+        setCharIdx((c) => c + 1);
+      }, charIdx === phrase.length ? pauseMs : typingSpeed);
+    } else if (!deleting && charIdx > phrase.length) {
+      setDeleting(true);
+    } else if (deleting && charIdx > 0) {
+      timer = setTimeout(() => {
+        setDisplay(phrase.slice(0, charIdx - 1));
+        setCharIdx((c) => c - 1);
+      }, deleteSpeed);
+    } else {
+      setDeleting(false);
+      setPhraseIdx((i) => (i + 1) % phrases.length);
+    }
+    return () => clearTimeout(timer);
+  }, [charIdx, deleting, phraseIdx, phrases, typingSpeed, pauseMs, deleteSpeed]);
+
+  return display;
+}
+
 export default function Services() {
+  const [activeService, setActiveService] = useState(0);
+  const typewriterText = useTypewriter(TYPEWRITER_PHRASES);
+
   return (
     <>
       {/* ── Page Hero ─────────────────────────────────────────────── */}
@@ -60,7 +105,13 @@ export default function Services() {
           <div className="page-hero-inner">
             <div>
               <span className="eyebrow">What We Do</span>
-              <h1>Services built for how<br />software actually ships.</h1>
+              <h1 style={{ minHeight: "2.2em" }}>
+                Services built for how<br />
+                <span className="typewriter-phrase">
+                  {typewriterText}
+                  <span className="typewriter-cursor" />
+                </span>
+              </h1>
               <p className="lead">
                 Pick one service or the whole pipeline — we plug in wherever your team needs us.
                 Every engagement is senior-led, QA-first, and scoped upfront.
@@ -84,7 +135,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ── 12-Service Grid ───────────────────────────────────────── */}
+      {/* ── Vertical Accordion List (Ignite Agency Style) ─────────── */}
       <section>
         <div className="wrap">
           <Reveal className="section-head">
@@ -92,23 +143,34 @@ export default function Services() {
             <h2>Everything under one roof.</h2>
             <p>Most engagements combine 2–3 services. The seam between them is where the interesting work lives.</p>
           </Reveal>
-          <div className="service-grid">
-            {SERVICES.map((s) => (
-              <Reveal key={s.title}>
-                <div className="service-card">
-                  <div className="service-icon">{s.icon}</div>
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
-                  <Link to="/contact" className="link">
-                    Learn more{" "}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </Link>
+
+          <Reveal>
+            <div className="service-accordion-list">
+              {SERVICES.map((s, idx) => (
+                <div
+                  key={s.title}
+                  className={`service-row ${activeService === idx ? "open" : ""}`}
+                  onClick={() => setActiveService(idx)}
+                >
+                  <div className="service-row-header">
+                    <div className="service-row-left">
+                      <span className="service-row-num">{String(idx + 1).padStart(2, "0")}</span>
+                      <span className="service-row-title">{s.title}</span>
+                    </div>
+                    <span className="service-row-arrow">{s.icon}</span>
+                  </div>
+                  <div className="service-row-desc">
+                    <p style={{ fontSize: "16px", color: "var(--muted)", marginTop: "12px", lineHeight: "1.65" }}>
+                      {s.desc}
+                    </p>
+                    <Link to="/contact" className="btn btn-outline" style={{ marginTop: "18px", padding: "8px 20px", fontSize: "13px" }}>
+                      Inquire About This Service →
+                    </Link>
+                  </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -141,7 +203,7 @@ export default function Services() {
             <h2>Three ways to work with us.</h2>
           </Reveal>
           <Reveal>
-            <div className="service-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+            <div className="service-grid">
               {[
                 { dur: "2–4 Weeks",  name: "Sprint",      desc: "A landing page, brand refresh, or scoping document.", from: "c. $1,800", dark: false },
                 { dur: "✦ 8–12 Weeks", name: "Engagement", desc: "The default. Full product surface, brand system, or platform build.", from: "c. $8,500", dark: true },
@@ -150,12 +212,12 @@ export default function Services() {
                 <div
                   key={name}
                   className="service-card"
-                  style={dark ? { background: "var(--ink)", borderColor: "var(--ink)" } : {}}
+                  style={dark ? { borderColor: "var(--accent)" } : {}}
                 >
-                  <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: dark ? "var(--accent)" : "var(--muted)", marginBottom: "16px" }}>{dur}</p>
-                  <h3 style={dark ? { color: "#fff" } : {}}>{name}</h3>
-                  <p style={dark ? { color: "rgba(255,255,255,0.6)" } : {}}>{desc}</p>
-                  <p style={{ marginTop: "24px", fontFamily: "var(--display)", fontSize: "22px", fontWeight: 800, color: dark ? "#fff" : "var(--ink)" }}>{from}</p>
+                  <p style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--accent)", marginBottom: "16px" }}>{dur}</p>
+                  <h3>{name}</h3>
+                  <p style={{ marginTop: "12px", color: "var(--muted)" }}>{desc}</p>
+                  <p style={{ marginTop: "24px", fontFamily: "var(--display)", fontSize: "24px", fontWeight: 800, color: "var(--ink)" }}>{from}</p>
                 </div>
               ))}
             </div>
@@ -163,7 +225,57 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────── */}
+      {/* ── Tech Bento Grid ─────────────────────────────────────────── */}
+      <section className="surface">
+        <div className="wrap">
+          <Reveal className="section-head">
+            <span className="eyebrow">Our Stack</span>
+            <h2>Modern technologies we build with.</h2>
+            <p>We choose stable, widely-supported tools optimized for speed, safety, and cloud deployment.</p>
+          </Reveal>
+          
+          <Reveal>
+            <div className="tech-bento-grid">
+              {[
+                { name: "React / Next.js", cat: "Frontend", desc: "For snappy, client-facing user interfaces & server-rendered sites.", glow: "rgba(0, 240, 255, 0.15)", icon: "⚛️" },
+                { name: "FastAPI / Node.js", cat: "Backend", desc: "High-performance, type-safe API gateways and real-time backend systems.", glow: "rgba(0, 208, 130, 0.15)", icon: "🐍" },
+                { name: "PostgreSQL / Redis", cat: "Databases", desc: "Structured SQL relational stores paired with fast distributed in-memory cache.", glow: "rgba(155, 81, 224, 0.15)", icon: "🗄️" },
+                { name: "AWS / Docker", cat: "DevOps & Cloud", desc: "Secure containerized orchestration and serverless auto-scaling setups.", glow: "rgba(255, 105, 0, 0.15)", icon: "☁️" },
+                { name: "Playwright / Jest", cat: "QA & Testing", desc: "End-to-end user flows and unit testing suites built right in from sprint one.", glow: "rgba(255, 0, 122, 0.15)", icon: "🧪" },
+                { name: "Figma / GSAP", cat: "Design & Interaction", desc: "Pixel-perfect interactive prototyping and fluid high-performance web animations.", glow: "rgba(198, 255, 0, 0.15)", icon: "🎨" }
+              ].map((t) => {
+                const handleMouseMove = (e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  card.style.setProperty("--mouse-x", `${x}px`);
+                  card.style.setProperty("--mouse-y", `${y}px`);
+                };
+
+                return (
+                  <div
+                    key={t.name}
+                    className="tech-bento-card"
+                    onMouseMove={handleMouseMove}
+                    style={{ "--glow-color": t.glow }}
+                  >
+                    <div className="bento-card-bg-glow" />
+                    <div className="bento-card-content">
+                      <div className="bento-card-header">
+                        <span className="bento-icon">{t.icon}</span>
+                        <span className="bento-category">{t.cat}</span>
+                      </div>
+                      <h3>{t.name}</h3>
+                      <p>{t.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Reveal>
+        </div>
+      </section>
       <section>
         <div className="wrap">
           <Reveal>
@@ -173,7 +285,7 @@ export default function Services() {
                 <p>Tell us what you're building — we'll reply within one business day.</p>
               </div>
               <div className="cta-actions">
-                <Link to="/contact" className="btn btn-primary">Start Your Project</Link>
+                <Link to="/contact" className="btn btn-primary">Start Your Project →</Link>
                 <Link to="/projects" className="btn btn-outline">See Our Work</Link>
               </div>
             </div>
